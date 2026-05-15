@@ -1,5 +1,5 @@
 /**
- * welcome-header — renders a "Welcome to ultra-pi" banner above the prompt
+ * welcome-header - renders a "Welcome to ultra-pi" banner above the prompt
  * at the start of each pi session.
  *
  * Replaces pi's default keybinding-hints header. Run /builtin-header (from the
@@ -10,9 +10,9 @@ import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 
 const TITLE = "Welcome to ultra-pi";
 const SUBTITLE =
-	"subagents · /btw · firecrawl · pi-lens · plannotator · markdown · mermaid · mcp";
+	"subagents · /btw · jina · pi-lens · plannotator · markdown · mermaid · mcp";
 
-// ANSI helpers — bright cyan title, dim grey subtitle.
+// ANSI helpers - bright cyan title, dim grey subtitle.
 const ESC = "\x1b[";
 const TITLE_STYLE = `${ESC}1;38;5;51m`; // bold bright cyan
 const SUB_STYLE = `${ESC}38;5;244m`; // grey

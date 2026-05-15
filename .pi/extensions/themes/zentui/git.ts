@@ -1,6 +1,6 @@
 /**
  * Git status reader. Used by themes that show repo state in the footer.
- * Pure helper, no pi imports — safe to import from any theme.
+ * Pure helper, no pi imports - safe to import from any theme.
  */
 
 import { execFile } from "node:child_process";

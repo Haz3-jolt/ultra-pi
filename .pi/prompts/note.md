@@ -21,6 +21,6 @@ You are about to write a project note. The user will give a topic; you will:
    ## Source
    <commit, issue, file path, or "discovered $(date) during $task">
    ```
-4. Do NOT pad. If there's nothing non-obvious to say, tell the user — don't write a stub.
+4. Do NOT pad. If there's nothing non-obvious to say, tell the user - don't write a stub.
 
 Topic: $ARGUMENTS

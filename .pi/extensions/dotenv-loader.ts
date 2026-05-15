@@ -1,14 +1,14 @@
 /**
- * dotenv-loader — loads .env files into process.env before other extensions read config.
+ * dotenv-loader - loads .env files into process.env before other extensions read config.
  *
  * Runs synchronously in the extension factory so vars are available immediately.
  * Also reloads on session_start (reload/resume) to pick up file changes.
  *
  * Config (env vars, since .env isn't loaded yet):
- *   ENV_LOADER_FILES     — comma-separated .env paths, default: ".env"
- *   ENV_LOADER_OVERRIDE  — "true" to overwrite existing vars, default: "false"
- *   ENV_LOADER_SILENT    — "true" to suppress all output, default: "false"
- *   ENV_LOADER_ENCODING  — file encoding, default: "utf-8"
+ *   ENV_LOADER_FILES     - comma-separated .env paths, default: ".env"
+ *   ENV_LOADER_OVERRIDE  - "true" to overwrite existing vars, default: "false"
+ *   ENV_LOADER_SILENT    - "true" to suppress all output, default: "false"
+ *   ENV_LOADER_ENCODING  - file encoding, default: "utf-8"
  */
 
 import { existsSync, readFileSync } from "node:fs";
@@ -106,7 +106,7 @@ export default function dotenvLoader(pi: ExtensionAPI) {
 	const silent = process.env.ENV_LOADER_SILENT === "true";
 	const cwd = process.cwd();
 
-	// Load immediately in factory — before other extensions' factories run.
+	// Load immediately in factory - before other extensions' factories run.
 	const result = loadEnvFiles(cwd);
 
 	if (!silent) {

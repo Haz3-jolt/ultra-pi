@@ -1,5 +1,5 @@
 /**
- * zentui — Starship-inspired statusline for ultra-pi.
+ * zentui - Starship-inspired statusline for ultra-pi.
  *
  * Inspired by https://github.com/lmilojevicc/pi-zentui (MIT). Rewritten to
  * fix the "stale ctx" crash on session replacement: all dynamic data is
