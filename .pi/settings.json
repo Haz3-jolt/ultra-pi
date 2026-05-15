@@ -1,0 +1,22 @@
+{
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-7",
+  "defaultThinkingLevel": "medium",
+  "retry": {
+    "enabled": true,
+    "maxRetries": 3
+  },
+  "subagents": {
+    "disableBuiltins": true
+  },
+  "packages": [
+    "..",
+    "npm:pi-subagents",
+    "npm:pi-btw",
+    "npm:pi-mcp-adapter",
+    "npm:pi-lens",
+    "npm:pi-markdown-preview",
+    "npm:pi-mermaid",
+    "npm:@plannotator/pi-extension"
+  ]
+}

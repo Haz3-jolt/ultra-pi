@@ -1,0 +1,17 @@
+{
+  "name": "ultra-pi",
+  "version": "0.1.0",
+  "description": "Custom pi.dev coding harness — subagents, /btw, MCP, lens, plannotator, mermaid, markdown preview, self-hosted Firecrawl.",
+  "private": true,
+  "keywords": ["pi-package"],
+  "license": "MIT",
+  "pi": {
+    "extensions": ["./.pi/extensions", "./.pi/extensions/themes"],
+    "skills": ["./.pi/skills"],
+    "prompts": ["./.pi/prompts"],
+    "agents": ["./.pi/agents"]
+  },
+  "devDependencies": {
+    "@mariozechner/pi-coding-agent": "latest"
+  }
+}
