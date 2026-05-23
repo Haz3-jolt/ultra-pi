@@ -9,7 +9,6 @@ Custom [pi.dev](https://pi.dev) coding harness.
 | `pi-subagents` (nicopreme)  | Subagent delegation, chains, parallel execution   |
 | `pi-btw`                    | `/btw` side-channel for one-off questions         |
 | `pi-mcp-adapter`            | Bridge any MCP server into pi                     |
-| `pi-lens`                   | LSP + linters (biome/ruff/ast-grep) feedback loop |
 | `pi-markdown-preview`       | Browser/PDF markdown + LaTeX preview              |
 | `pi-mermaid`                | ASCII mermaid diagrams in TUI                     |
 | `@plannotator/pi-extension` | Interactive plan review with annotations          |

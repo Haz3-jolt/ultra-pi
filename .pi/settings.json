@@ -14,7 +14,6 @@
     "npm:pi-subagents",
     "npm:pi-btw",
     "npm:pi-mcp-adapter",
-    "npm:pi-lens",
     "npm:pi-markdown-preview",
     "npm:pi-mermaid",
     "npm:@plannotator/pi-extension"
