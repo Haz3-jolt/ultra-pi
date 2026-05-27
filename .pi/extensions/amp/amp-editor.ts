@@ -327,10 +327,10 @@ class AmpEditor extends CustomEditor {
     if (!leftLabel && !rightLabel) return [];
 
     const contentWidth = Math.max(1, width - STATUS_LEFT_INSET - STATUS_RIGHT_INSET);
-    const maxLeft = rightLabel
-      ? Math.max(0, Math.floor(contentWidth * 0.44))
-      : contentWidth;
-    const maxRight = Math.max(0, contentWidth - maxLeft - 2);
+    const maxLeft = !rightLabel
+      ? contentWidth
+      : Math.max(0, Math.floor(contentWidth * 0.65));
+    const maxRight = Math.max(0, contentWidth - maxLeft - 1);
     const left = truncateToWidth(leftLabel, maxLeft, "…");
     const right = truncateToWidth(rightLabel, maxRight, "…");
     const gap = " ".repeat(Math.max(1, contentWidth - visibleWidth(left) - visibleWidth(right)));
@@ -356,7 +356,7 @@ class AmpEditor extends CustomEditor {
 
   private borderWithRightLabel(width: number, label: string): string {
     const innerWidth = Math.max(0, width - 2);
-    const right = this.fg("muted", truncateToWidth(label, Math.max(0, innerWidth - 2), "…"));
+    const right = truncateToWidth(label, Math.max(0, innerWidth - 2), "…");
     const fill = Math.max(0, innerWidth - visibleWidth(right));
     return this.borderColor("╰") + this.borderColor("─".repeat(fill)) + right + this.borderColor("╯");
   }
