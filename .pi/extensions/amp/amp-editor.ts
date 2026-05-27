@@ -327,7 +327,9 @@ class AmpEditor extends CustomEditor {
     if (!leftLabel && !rightLabel) return [];
 
     const contentWidth = Math.max(1, width - STATUS_LEFT_INSET - STATUS_RIGHT_INSET);
-    const maxLeft = Math.max(0, Math.floor(contentWidth * 0.44));
+    const maxLeft = rightLabel
+      ? Math.max(0, Math.floor(contentWidth * 0.44))
+      : contentWidth;
     const maxRight = Math.max(0, contentWidth - maxLeft - 2);
     const left = truncateToWidth(leftLabel, maxLeft, "…");
     const right = truncateToWidth(rightLabel, maxRight, "…");
