@@ -114,6 +114,29 @@ function lastSegment(path: string): string {
 	return parts[parts.length - 1] ?? path;
 }
 
+function starshipPath(theme: Pick<Theme, "fg">, path: string): string {
+	const home = process.env.HOME ?? process.env.USERPROFILE ?? "";
+	let display = path;
+	if (home && display.startsWith(home)) {
+		display = "~" + display.slice(home.length);
+	}
+	const parts = display.split("/").filter(Boolean);
+	if (parts.length === 0) return colorize(theme, COLORS.cwdText, "/");
+
+	// Color scheme: tilde/root dim, middle segments muted, last segment bold accent
+	const last = parts.pop()!;
+	const prefix = display.startsWith("~") ? "~" : "/";
+	const mid = parts.slice(display.startsWith("~") ? 1 : 0);
+
+	const prefixStr = colorize(theme, "syntaxType", prefix);
+	const sep = colorize(theme, "borderMuted", "/");
+	const midStr = mid.map(p => colorize(theme, "muted", p)).join(sep);
+	const lastStr = colorize(theme, COLORS.cwdText, last);
+
+	const segments = [prefixStr, midStr, lastStr].filter(Boolean);
+	return `${ICONS.cwd} ${segments.join(sep)}`;
+}
+
 function syncFromCtx(ctx: ExtensionContext): void {
 	state.cwd = ctx.cwd;
 	state.modelLabel = ctx.model?.id ?? "no-model";
@@ -267,11 +290,7 @@ export default function zentui(pi: ExtensionAPI) {
 					const innerWidth = Math.max(1, width - 2);
 					const sep = colorize(theme, COLORS.separator, " | ");
 
-					const cwdLabel = colorize(
-						theme,
-						COLORS.cwdText,
-						`${ICONS.cwd} ${lastSegment(state.cwd)}`,
-					);
+					const cwdLabel = starshipPath(theme, state.cwd);
 					const branchLabel = buildBranchLabel(theme);
 					const runtimeLabel = buildRuntimeLabel(theme);
 
