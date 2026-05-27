@@ -268,7 +268,19 @@ class AmpEditor extends CustomEditor {
 
   private getCwdLabel(): string {
     const git = getGitInfo(this.ctx.cwd);
-    return ` ${compactPath(this.ctx.cwd)}${git.branch ? ` (${git.branch})` : ""} `;
+    const path = compactPath(this.ctx.cwd);
+    const parts = path.split("/");
+    const last = parts.pop() ?? path;
+    const prefix = parts.join("/");
+    const dim = (t: string) => this.fg("dim", t);
+    const sep = this.fg("dim", "/");
+    const pathLabel = prefix
+      ? `${dim(prefix)}${sep}${this.fg("text", last)}`
+      : this.fg("text", last);
+    const branchLabel = git.branch
+      ? ` ${dim("[")}${this.fg("accent", git.branch)}${dim("]")}`
+      : "";
+    return ` ${pathLabel}${branchLabel} `;
   }
 
   private getWorkingLabel(): string {
