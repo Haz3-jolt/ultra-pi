@@ -6,7 +6,8 @@
   "keywords": ["pi-package"],
   "license": "MIT",
   "pi": {
-    "extensions": ["./.pi/extensions", "./.pi/extensions/themes"],
+    "extensions": ["./.pi/extensions", "./.pi/extensions/amp/amp-editor.ts", "./.pi/extensions/amp/amp-user-message.ts", "./.pi/extensions/amp/pi-tool-display/index.ts"],
+    "themes": ["./.pi/extensions/themes/amp"],
     "skills": ["./.pi/skills"],
     "prompts": ["./.pi/prompts"],
     "agents": ["./.pi/agents"]

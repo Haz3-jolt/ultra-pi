@@ -105,6 +105,12 @@ function compactPath(cwd: string): string {
   return cwd;
 }
 
+function lastSegment(path: string): string {
+  const norm = path.replace(/\\/g, "/").replace(/\/+$/, "");
+  const parts = norm.split("/").filter(Boolean);
+  return parts[parts.length - 1] ?? path;
+}
+
 function isEditorRule(line: string): boolean {
   const plain = stripAnsi(line).trim();
   return plain.includes("─") && [...plain].every((char) => "─↑↓ 0123456789more".includes(char));
@@ -268,19 +274,22 @@ class AmpEditor extends CustomEditor {
 
   private getCwdLabel(): string {
     const git = getGitInfo(this.ctx.cwd);
-    const path = compactPath(this.ctx.cwd);
-    const parts = path.split("/");
-    const last = parts.pop() ?? path;
-    const prefix = parts.join("/");
+    const dir = lastSegment(this.ctx.cwd);
     const dim = (t: string) => this.fg("dim", t);
-    const sep = this.fg("dim", "/");
-    const pathLabel = prefix
-      ? `${dim(prefix)}${sep}${this.fg("text", last)}`
-      : this.fg("text", last);
-    const branchLabel = git.branch
-      ? ` ${dim("[")}${this.fg("accent", git.branch)}${dim("]")}`
-      : "";
-    return ` ${pathLabel}${branchLabel} `;
+
+    // Branch with icon
+    let branchStr = "";
+    if (git.branch) {
+      branchStr = ` ${dim("on")} ${this.fg("accent", `\ue0a0 ${git.branch}`)}`;
+    }
+
+    // Git status icons
+    const statusIcons = [
+      git.changedFiles > 0 ? "!" : "",
+    ].join("");
+    const statusStr = statusIcons ? ` ${this.fg("error", `[${statusIcons}]`)}` : "";
+
+    return ` ${this.fg("text", dir)}${branchStr}${statusStr} `;
   }
 
   private getWorkingLabel(): string {
@@ -327,16 +336,13 @@ class AmpEditor extends CustomEditor {
     if (!leftLabel && !rightLabel) return [];
 
     const contentWidth = Math.max(1, width - STATUS_LEFT_INSET - STATUS_RIGHT_INSET);
-    const maxLeft = !rightLabel
-      ? contentWidth
-      : Math.max(0, Math.floor(contentWidth * 0.65));
-    const maxRight = Math.max(0, contentWidth - maxLeft - 1);
-    const left = truncateToWidth(leftLabel, maxLeft, "…");
-    const right = truncateToWidth(rightLabel, maxRight, "…");
-    const gap = " ".repeat(Math.max(1, contentWidth - visibleWidth(left) - visibleWidth(right)));
-    const leftPadding = " ".repeat(Math.min(STATUS_LEFT_INSET, Math.max(0, width - contentWidth)));
-    const rightPadding = " ".repeat(Math.min(STATUS_RIGHT_INSET, Math.max(0, width - contentWidth - visibleWidth(leftPadding))));
-    return [`${leftPadding}${left}${gap}${right}${rightPadding}`];
+    const left = truncateToWidth(leftLabel, contentWidth, "…");
+    const lw = visibleWidth(left);
+    const remaining = Math.max(0, contentWidth - lw - 1);
+    const right = rightLabel ? truncateToWidth(rightLabel, remaining, "…") : "";
+    const rw = visibleWidth(right);
+    const gap = " ".repeat(Math.max(1, contentWidth - lw - rw));
+    return [` ${left}${gap}${right} `];
   }
 
   private borderWithLabels(width: number, leftLabel: string, rightLabel: string): string {
@@ -464,9 +470,7 @@ export default function (pi: ExtensionAPI) {
 
     ctx.ui.setFooter(() => ({
       invalidate() {},
-      render() {
-        return [];
-      },
+      render() { return []; },
     }));
   });
 
