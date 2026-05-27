@@ -192,9 +192,21 @@ async function refreshProject(cwd: string): Promise<void> {
 	}
 }
 
-function buildBranchLabel(theme: Pick<Theme, "fg">): string {
+function bracket(theme: Pick<Theme, "fg">, content: string): string {
+	const br = colorize(theme, "borderMuted", "[");
+	const brClose = colorize(theme, "borderMuted", "]");
+	return `${br}${content}${brClose}`;
+}
+
+function buildBranchSegment(theme: Pick<Theme, "fg">): string {
 	if (!state.branch) return "";
 	const gitColor = (t: string) => colorize(theme, COLORS.git, t);
+	const inner = `${gitColor(ICONS.git)} ${gitColor(state.branch)}`;
+	return bracket(theme, inner);
+}
+
+function buildGitStatusSegment(theme: Pick<Theme, "fg">): string {
+	if (!state.branch) return "";
 	const gitStatusColor = (t: string) => colorize(theme, COLORS.gitStatus, t);
 
 	const allStatus = [
@@ -217,12 +229,9 @@ function buildBranchLabel(theme: Pick<Theme, "fg">): string {
 					? ICONS.behind
 					: "";
 
-	const statusBlock =
-		allStatus || aheadBehind
-			? gitStatusColor(`[${allStatus}${aheadBehind}]`)
-			: "";
-
-	return `${colorize(theme, "text", "on")} ${gitColor(ICONS.git)} ${gitColor(state.branch)}${statusBlock ? ` ${statusBlock}` : ""}`;
+	const combined = `${allStatus}${aheadBehind}`;
+	if (!combined) return "";
+	return bracket(theme, gitStatusColor(combined));
 }
 
 function runtimeColor(name: string | undefined): string {
@@ -245,11 +254,12 @@ function runtimeColor(name: string | undefined): string {
 	}
 }
 
-function buildRuntimeLabel(theme: Pick<Theme, "fg">): string {
+function buildRuntimeSegment(theme: Pick<Theme, "fg">): string {
 	const r = state.runtime;
 	if (!r) return "";
 	const label = r.version ? `${r.symbol} ${r.version}` : r.symbol;
-	return `${colorize(theme, "text", "via")} ${colorize(theme, runtimeColor(r.name), label)}`;
+	const inner = colorize(theme, runtimeColor(r.name), label);
+	return bracket(theme, inner);
 }
 
 function pickContextColor(ctx: ExtensionContext | undefined): string {
@@ -288,22 +298,22 @@ export default function zentui(pi: ExtensionAPI) {
 				invalidate() {},
 				render(width: number): string[] {
 					const innerWidth = Math.max(1, width - 2);
-					const sep = colorize(theme, COLORS.separator, " | ");
 
-					const cwdLabel = starshipPath(theme, state.cwd);
-					const branchLabel = buildBranchLabel(theme);
-					const runtimeLabel = buildRuntimeLabel(theme);
+					const dirName = colorize(theme, COLORS.cwdText, lastSegment(state.cwd));
+					const branchSeg = buildBranchSegment(theme);
+					const statusSeg = buildGitStatusSegment(theme);
+					const runtimeSeg = buildRuntimeSegment(theme);
 
-					const left = [cwdLabel, branchLabel, runtimeLabel]
+					const left = [dirName, branchSeg, statusSeg, runtimeSeg]
 						.filter(Boolean)
-						.join(" ");
+						.join("");
 
 					const ctxColor = pickContextColor(ctx);
 					const right = [
-						colorize(theme, ctxColor, state.contextLabel),
-						colorize(theme, COLORS.tokens, state.tokenLabel),
-						colorize(theme, COLORS.cost, state.costLabel),
-					].join(sep);
+						bracket(theme, colorize(theme, ctxColor, state.contextLabel)),
+						bracket(theme, colorize(theme, COLORS.tokens, state.tokenLabel)),
+						bracket(theme, colorize(theme, COLORS.cost, state.costLabel)),
+					].join("");
 
 					const lw = visibleWidth(left);
 					const rw = visibleWidth(right);
