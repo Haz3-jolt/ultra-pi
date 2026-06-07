@@ -1100,7 +1100,7 @@ export function registerToolDisplayOverrides(
       );
     },
     });
-  });
+  }, { deferUntilBuiltinOwner: true });
 
   registerIfOwned("ls", () => {
     pi.registerTool({
@@ -1139,7 +1139,7 @@ export function registerToolDisplayOverrides(
       );
     },
     });
-  });
+  }, { deferUntilBuiltinOwner: true });
 
   registerIfOwned("edit", () => {
     pi.registerTool({
@@ -1287,7 +1287,7 @@ export function registerToolDisplayOverrides(
       );
     },
     });
-  });
+  }, { deferUntilBuiltinOwner: true });
 
   registerIfOwned("bash", () => {
     pi.registerTool({
