@@ -1,0 +1,19 @@
+{
+  "name": "pi-extensions",
+  "private": true,
+  "dependencies": {
+    "@juicesharp/rpiv-ask-user-question": "^1.20.0",
+    "@juicesharp/rpiv-web-tools": "^1.20.0",
+    "@mrclrchtr/supi-insights": "^1.10.0",
+    "@observal/pi-insights": "^1.2.3",
+    "@plannotator/pi-extension": "^0.21.1",
+    "observal-pi": "^1.9.1",
+    "pi-btw": "^0.4.1",
+    "pi-insights": "^0.3.0",
+    "pi-markdown-preview": "^0.10.0",
+    "pi-mcp-adapter": "^2.10.0",
+    "pi-mermaid": "^0.3.0",
+    "pi-messenger-bridge": "^0.4.0",
+    "pi-tool-display": "^0.4.3"
+  }
+}

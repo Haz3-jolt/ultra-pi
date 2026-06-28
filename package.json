@@ -1,18 +1,27 @@
 {
   "name": "ultra-pi",
   "version": "0.1.0",
-  "description": "Custom pi.dev coding harness - subagents, /btw, MCP, plannotator, mermaid, markdown preview.",
   "private": true,
-  "keywords": ["pi-package"],
-  "license": "MIT",
-  "pi": {
-    "extensions": ["./.pi/extensions", "./.pi/extensions/amp/amp-editor.ts", "./.pi/extensions/amp/amp-user-message.ts", "./.pi/extensions/amp/pi-tool-display/index.ts", "./.pi/extensions/amp/pi-tool-display-codex.ts"],
-    "themes": ["./.pi/extensions/themes/amp"],
-    "skills": ["./.pi/skills"],
-    "prompts": ["./.pi/prompts"],
-    "agents": ["./.pi/agents"]
+  "license": "AGPL-3.0-only",
+  "keywords": [
+    "pi-package"
+  ],
+  "scripts": {
+    "install:pi-npm": "cd .pi/npm && npm_config_package_lock=false npm install"
   },
-  "devDependencies": {
-    "@mariozechner/pi-coding-agent": "latest"
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  },
+  "pi": {
+    "extensions": [
+      "./.pi/extensions"
+    ],
+    "skills": [
+      "./.pi/skills"
+    ],
+    "themes": [
+      "./.pi/themes"
+    ]
   }
 }

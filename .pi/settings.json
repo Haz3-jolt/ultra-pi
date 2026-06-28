@@ -1,21 +1,22 @@
 {
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-7",
-  "defaultThinkingLevel": "medium",
-  "retry": {
-    "enabled": true,
-    "maxRetries": 3
-  },
-  "subagents": {
-    "disableBuiltins": true
-  },
+  "lastChangelogVersion": "0.79.10",
+  "defaultProvider": "azure-openai-responses",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "high",
   "packages": [
-    "..",
-    "npm:pi-subagents",
     "npm:pi-btw",
     "npm:pi-mcp-adapter",
     "npm:pi-markdown-preview",
     "npm:pi-mermaid",
-    "npm:@plannotator/pi-extension"
-  ]
+    "npm:@plannotator/pi-extension",
+    "npm:pi-messenger-bridge",
+    "npm:observal-pi",
+    "npm:@observal/pi-insights",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-tool-display",
+    "npm:@juicesharp/rpiv-web-tools",
+    "git:github.com/DietrichGebert/ponytail"
+  ],
+  "hideThinkingBlock": true,
+  "theme": "ultra-pi-one"
 }
