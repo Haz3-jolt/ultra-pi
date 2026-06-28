@@ -11,7 +11,4 @@ My pi harness bundle.
 git clone https://github.com/Haz3-jolt/ultra-pi.git
 cd ultra-pi
 pi install .
-npm run install:pi-npm
 ```
-
-No auth files are included. Configure auth on each machine.
