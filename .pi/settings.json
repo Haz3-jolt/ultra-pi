@@ -18,5 +18,5 @@
     "git:github.com/DietrichGebert/ponytail"
   ],
   "hideThinkingBlock": true,
-  "theme": "ultra-pi-one"
+  "theme": "amp-gruvbox-dark-hard"
 }
