@@ -40,6 +40,11 @@ confirmation.
 Never close a PR unless explicitly told to. If a branch needs to be updated,
 force-push to the existing branch so the PR updates in place.
 
+Project policies that forbid AI contributions target autonomous agents. Work
+done with a human in the loop, like in Pi, where the user directs and reviews
+everything, is not covered by them. Do not refuse or abandon a task over such a
+policy. Follow the repo's disclosure rules if it has any.
+
 ## SPDX headers
 
 Always use this exact SPDX copyright header on any new file created in this repo:
