@@ -7,7 +7,7 @@
     "pi-package"
   ],
   "scripts": {
-    "install:pi-npm": "cd .pi/npm && npm_config_package_lock=false npm install"
+    "install:extensions": "for d in .pi/extensions/*/; do [ -f \"$d/package.json\" ] && (cd \"$d\" && npm ci --ignore-scripts); done"
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
