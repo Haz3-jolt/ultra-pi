@@ -1,0 +1,1 @@
+{ "name": "ultra-pi-mermaid", "private": true, "type": "module", "dependencies": { "beautiful-mermaid": "^1.0.0" } }
