@@ -13,7 +13,7 @@ cd ultra-pi
 npm run install:extensions
 pi install .
 pi install npm:@juicesharp/rpiv-web-tools
-cp .pi/AGENTS.md ~/.pi/agent/AGENTS.md
+ln -sf "$PWD/.pi/AGENTS.md" ~/.pi/agent/AGENTS.md
 ```
 
 ## Contents

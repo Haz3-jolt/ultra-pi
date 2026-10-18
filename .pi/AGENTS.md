@@ -122,7 +122,5 @@ confirmation step appropriate to what was built.
 
 ## Skills
 
-- **playwright-cli**
-- **pr-review**
-- **git-workflow**
-- **ruff-fix**
+- **impeccable**
+- **ponytail**
